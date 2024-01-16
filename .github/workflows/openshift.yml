@@ -23,4 +23,4 @@ jobs:
       - name: Apply OpenShift Deployment
         run: |
           oc project ${{ secrets.OPENSHIFT_PROJECT }}  
-          oc apply -f deployments/deployment.yaml
+          oc apply -f ../deployments/deployment.yaml

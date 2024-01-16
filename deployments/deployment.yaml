@@ -19,4 +19,4 @@ spec:
           image: python:3.10  # Example base image
           ports:
             - containerPort: 8080  # Port your Python application listens on
-          command: ["python", "/app/hello.py"]
+          command: ["python", "hello.py"]

@@ -3,12 +3,10 @@ kind: Deployment
 metadata:
   name: my-python-app
 spec:
-  replicas: 1
+  replicas: 1  # Adjust as needed
   selector:
     matchLabels:
       app: my-python-app
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
@@ -16,10 +14,21 @@ spec:
     spec:
       containers:
         - name: my-python-container
-          image: python:3.10  # Example base image
+          image: python:3.10  # Base Python image
           ports:
-            - containerPort: 8080  # Port your Python application listens on
-          command:
-            - "python"
-            - "-c"
-            - "print('Hello from my python script')"
+            - containerPort: 8080
+          command: ["python", "app.py"]  # Command to run your Python app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-python-service
+spec:
+  selector:
+    app: my-python-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+
